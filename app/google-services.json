@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "166463567556",
+    "project_id": "aplicacionpedro",
+    "storage_bucket": "aplicacionpedro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166463567556:android:fe692468474596d199bb91",
+        "android_client_info": {
+          "package_name": "com.example.aplicacionfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166463567556-o6t87egcbeg0a8jvpu21kicbqetn0p21.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplicacionfinal",
+            "certificate_hash": "f5b4c88ac5648d371b885c86fb1fa5f06e61a625"
+          }
+        },
+        {
+          "client_id": "166463567556-k7o5410ovahc826j0ne7uovke9rd841v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLNES5dn7KbDA6HAgbYBzCetVMl3MX-9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166463567556-k7o5410ovahc826j0ne7uovke9rd841v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

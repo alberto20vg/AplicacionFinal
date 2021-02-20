@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/idImagenIngrediente2"
+            android:layout_width="178dp"
+            android:layout_height="151dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.074"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.16"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/idNombreIngrediente2"
+            android:layout_width="140dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="36dp"
+
+            android:text="TextView"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/idImagenIngrediente2"
+            app:layout_constraintStart_toEndOf="@+id/idImagenIngrediente2"
+            app:layout_constraintTop_toTopOf="@+id/idImagenIngrediente2"
+            app:layout_constraintVertical_bias="0.675" />
+
+        <ImageButton
+            android:id="@+id/button13"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@+id/idImagenIngrediente2"
+            app:layout_constraintHorizontal_bias="0.279"
+            app:layout_constraintStart_toStartOf="@+id/idImagenIngrediente2"
+            app:layout_constraintTop_toBottomOf="@+id/idImagenIngrediente2"
+            app:srcCompat="@drawable/ver" />
+
+        <ImageButton
+            android:id="@+id/button23"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/button33"
+            app:layout_constraintStart_toEndOf="@+id/button33"
+            app:layout_constraintTop_toTopOf="@+id/button33"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/borrar" />
+
+        <ImageButton
+            android:id="@+id/button33"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/button13"
+            app:layout_constraintStart_toEndOf="@+id/button13"
+            app:layout_constraintTop_toTopOf="@+id/button13"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/editar" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="391dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="2dp"
+            android:background="#000000"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button33" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
