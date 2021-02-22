@@ -55,7 +55,7 @@ public class anadirPlatosActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
         recyclerViewIngredientes.setAdapter(mAdapter);
 
-
+        listaIngredientes = new ArrayList<>();
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
