@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +24,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, IngredienteAdapter.ViewHolder> {
     Context context;
-    FirebaseFirestore mFirestore ;
+    FirebaseFirestore mFirestore;
+
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
      * FirestoreRecyclerOptions} for configuration options.
      *
      * @param options
      */
-    public IngredienteAdapter(Activity activity , FirestoreRecyclerOptions<Ingredientes> options) {
+    public IngredienteAdapter(Activity activity, FirestoreRecyclerOptions<Ingredientes> options) {
         super(options);
         context = activity;
     }
@@ -46,21 +48,35 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Ingredientes model) {
+        DocumentSnapshot platoDocument =
+                getSnapshots().getSnapshot(holder.getAdapterPosition());
+        final String id = platoDocument.getId();
+        DocumentReference docRef = mFirestore.collection("Ingredientes").document(id.trim());
+
         holder.textViewNombre.setText(model.getNombre());
         Glide.with(context).load(model.getImg()).into(holder.imageViewImagen);
-
+        if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+            holder.imageViewImagen.setAlpha((float) 0.4);
+        } else {
+            holder.imageViewImagen.setAlpha((float) 1);
+        }
         holder.btnAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                DocumentSnapshot platoDocument =
-                        getSnapshots().getSnapshot(holder.getAdapterPosition());
-                final String id = platoDocument.getId();
-                DocumentReference docRef = mFirestore.collection("Ingredientes").document(id.trim());
 
+                if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+                    holder.imageViewImagen.setAlpha((float) 0.4);
+                } else {
+                    holder.imageViewImagen.setAlpha((float) 1);
+                }
                 anadirPlatosActivity.añadirIngrediente(docRef);
                 Toast.makeText(context, "Funciona", Toast.LENGTH_SHORT).show();
-
+                if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+                    holder.imageViewImagen.setAlpha((float) 0.4);
+                } else {
+                    holder.imageViewImagen.setAlpha((float) 1);
+                }
 
             }
         });
@@ -73,6 +89,7 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
         CardView cardView;
         ImageButton btnAñadir;
 
+        LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,7 +97,6 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
             imageViewImagen = itemView.findViewById(R.id.idImagenIngrediente2);
             cardView = itemView.findViewById(R.id.cardViewIngrediente);
             btnAñadir = itemView.findViewById(R.id.button13);
-
         }
     }
 }

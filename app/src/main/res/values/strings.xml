@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AplicacionFinal</string>
+    <string name="app_name">Restaurante Valdivia</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -26,7 +26,5 @@
     <string name="userInfo">Información del usuario</string>
     <string name="changePassword"> Cambiar contraseña </string>
     <string name="logOut"> Cerrar Sesión </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="back"> volver </string>
 </resources>

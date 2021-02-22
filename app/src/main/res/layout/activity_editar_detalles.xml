@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.427"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <EditText
         android:id="@+id/editTextUrl"
@@ -32,22 +32,32 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
     <Button
-        android:id="@+id/btnGuardarEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUrl"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUrl" />
-
-    <Button
         android:id="@+id/btnCancelarEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Button"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/cancel"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewEditar"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewEditar" />
+
+    <Button
+        android:id="@+id/btnGuardarEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/safe"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerViewEditar"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewEditar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEditar"
+        android:layout_width="330dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="@+id/editTextUrl"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="@+id/editTextUrl"
         app:layout_constraintTop_toBottomOf="@+id/editTextUrl" />
 </androidx.constraintlayout.widget.ConstraintLayout>

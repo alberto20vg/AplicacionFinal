@@ -77,6 +77,7 @@ public class PlatoAdapter extends FirestoreRecyclerAdapter<Plato, PlatoAdapter.V
                 Intent intent = new Intent(context, EditarDetallesActivity.class);
                 intent.putExtra("EditarPlato", id);
                 context.startActivity(intent);
+
             }
         });
 

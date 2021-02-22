@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicacionFinal">
         <activity android:name=".EditarDetallesActivity"></activity>
-        <activity android:name=".verDetallesPlatos" />
         <activity android:name=".anadirIngredientesActivity" />
         <activity android:name=".anadirPlatosActivity" />
+        <activity android:name=".verDetallesPlatos" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"

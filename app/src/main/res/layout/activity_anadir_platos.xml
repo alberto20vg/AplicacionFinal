@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="40dp"
         android:text="@string/safe"
         app:layout_constraintEnd_toEndOf="@+id/recyclerView2"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
@@ -67,6 +67,7 @@
         android:id="@+id/addPlatoBtnCancelId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="@+id/recyclerView2"
@@ -74,11 +75,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView2"
-        android:layout_width="272dp"
-        android:layout_height="250dp"
+        android:layout_width="330dp"
+        android:layout_height="301dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="@+id/addPlatoFotoId"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/addPlatoFotoId" />
 </androidx.constraintlayout.widget.ConstraintLayout>

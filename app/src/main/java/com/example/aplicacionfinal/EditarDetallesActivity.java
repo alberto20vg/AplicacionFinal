@@ -2,8 +2,11 @@ package com.example.aplicacionfinal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,6 +28,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditarDetallesActivity extends AppCompatActivity {
 
@@ -32,11 +38,15 @@ public class EditarDetallesActivity extends AppCompatActivity {
     Button btnGuardar, btnCancelar;
     Activity at = this;
     Plato plato;
+    static EditarIngredienteAdapter mAdapter;
+    static DocumentReference docRef;
+    static ArrayList<DocumentReference> listaIngredientes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_detalles);
+
 
         nombreTexto = findViewById(R.id.editTextNombre);
         fotoTexto = findViewById(R.id.editTextUrl);
@@ -48,7 +58,8 @@ public class EditarDetallesActivity extends AppCompatActivity {
 
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
 
-        DocumentReference docRef = mFirestore.collection("Platos").document(valorRecibido);
+
+        docRef = mFirestore.collection("Platos").document(valorRecibido);
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -57,15 +68,14 @@ public class EditarDetallesActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
 
+                        plato = document.toObject(Plato.class);
+
+                        listaIngredientes = plato.getLista();
+
                         nombreTexto.setText(document.getString("nombre"));
                         fotoTexto.setText(document.getString("img"));
 
-                        PlatoPureba prueba = document.toObject(PlatoPureba.class);
-
-                        ArrayList<String> lista = prueba.getLista();
-
-                        Toast.makeText(at, lista.get(0).toString(), Toast.LENGTH_SHORT).show();
-
+                        actualizar();
 
                     } else {
                         Log.d(TAG, "No such document");
@@ -76,19 +86,35 @@ public class EditarDetallesActivity extends AppCompatActivity {
             }
         });
 
-        //poner un set en vez de un update y pasarle el objeto directamente
+        RecyclerView recyclerViewIngredientes = findViewById(R.id.recyclerViewEditar);
+        recyclerViewIngredientes.setLayoutManager(new LinearLayoutManager(this));
+
+        Query query = mFirestore.collection("Ingredientes");
+
+        FirestoreRecyclerOptions<Ingredientes> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Ingredientes>().setQuery(query, Ingredientes.class).build();
+
+        mAdapter = new EditarIngredienteAdapter(this, firestoreRecyclerOptions);
+        mAdapter.notifyDataSetChanged();
+        recyclerViewIngredientes.setAdapter(mAdapter);
+
+
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Map<String, Object> data = new HashMap<>();
+                data.put("nombre", nombreTexto.getText().toString());
+                data.put("img", fotoTexto.getText().toString());
+                data.put("lista", listaIngredientes);
+
                 docRef
-                        .update("nombre", nombreTexto.getText())
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                Toast.makeText(at, nombreTexto.getText(), Toast.LENGTH_SHORT).show();
-                            }
-                        })
+                        .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        Toast.makeText(at, nombreTexto.getText(), Toast.LENGTH_SHORT).show();
+                    }
+                })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
@@ -96,24 +122,45 @@ public class EditarDetallesActivity extends AppCompatActivity {
                             }
                         });
 
+
+                Intent intent = new Intent(EditarDetallesActivity.this, MainActivity.class);
+                startActivity(intent);
+
+
             }
         });
-
-        //estoy haciendo pruebas
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Query query = mFirestore.collection("Platos");
-
-                Task<QuerySnapshot> prueba = query.whereArrayContains("nombre", "prueba1").get();
-
-                prueba.toString();
-
-                Toast.makeText(at, prueba.toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditarDetallesActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
+    }
 
+    public static void añadirIngrediente(DocumentReference e) {
+        if (listaIngredientes.contains(e)) {
+            listaIngredientes.remove(e);
 
+        } else {
+            listaIngredientes.add(e);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
+    }
+
+    public void actualizar() {
+        mAdapter.notifyDataSetChanged();
     }
 }
