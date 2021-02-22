@@ -22,7 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, IngredienteAdapter.ViewHolder> {
+public class EditarIngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, EditarIngredienteAdapter.ViewHolder> {
     Context context;
     FirebaseFirestore mFirestore;
 
@@ -32,7 +32,7 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
      *
      * @param options
      */
-    public IngredienteAdapter(Activity activity, FirestoreRecyclerOptions<Ingredientes> options) {
+    public EditarIngredienteAdapter(Activity activity, FirestoreRecyclerOptions<Ingredientes> options) {
         super(options);
         context = activity;
     }
@@ -40,10 +40,10 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
 
     @NonNull
     @Override
-    public IngredienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public EditarIngredienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         mFirestore = FirebaseFirestore.getInstance();
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.view_ingredientes, viewGroup, false);
-        return new IngredienteAdapter.ViewHolder(view);
+        return new EditarIngredienteAdapter.ViewHolder(view);
     }
 
     @Override
@@ -55,9 +55,10 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
 
         holder.textViewNombre.setText(model.getNombre());
         Glide.with(context).load(model.getImg()).into(holder.imageViewImagen);
-        if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+
+        if (!EditarDetallesActivity.listaIngredientes.contains(docRef)) {
             holder.imageViewImagen.setAlpha((float) 0.4);
-        } else {
+        }else{
             holder.imageViewImagen.setAlpha((float) 1);
         }
         holder.btnAñadir.setOnClickListener(new View.OnClickListener() {
@@ -65,15 +66,16 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
             public void onClick(View v) {
 
 
-                if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+                if (!EditarDetallesActivity.listaIngredientes.contains(docRef)) {
                     holder.imageViewImagen.setAlpha((float) 0.4);
-                } else {
+                }else{
                     holder.imageViewImagen.setAlpha((float) 1);
                 }
-                anadirPlatosActivity.añadirIngrediente(docRef);
-                if (!anadirPlatosActivity.listaIngredientes.contains(docRef)) {
+                EditarDetallesActivity.añadirIngrediente(docRef);
+
+                if (!EditarDetallesActivity.listaIngredientes.contains(docRef)) {
                     holder.imageViewImagen.setAlpha((float) 0.4);
-                } else {
+                }else{
                     holder.imageViewImagen.setAlpha((float) 1);
                 }
 
@@ -88,7 +90,6 @@ public class IngredienteAdapter extends FirestoreRecyclerAdapter<Ingredientes, I
         CardView cardView;
         ImageButton btnAñadir;
 
-        LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

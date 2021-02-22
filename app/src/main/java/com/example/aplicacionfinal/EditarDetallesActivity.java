@@ -34,7 +34,7 @@ import java.util.Map;
 public class EditarDetallesActivity extends AppCompatActivity {
 
     private static final String TAG = "";
-    EditText nombreTexto, fotoTexto;
+    EditText nombreTexto, fotoTexto, descripcionTexto;
     Button btnGuardar, btnCancelar;
     Activity at = this;
     Plato plato;
@@ -50,6 +50,7 @@ public class EditarDetallesActivity extends AppCompatActivity {
 
         nombreTexto = findViewById(R.id.editTextNombre);
         fotoTexto = findViewById(R.id.editTextUrl);
+        descripcionTexto = findViewById(R.id.editTextDescripcion);
         btnCancelar = findViewById(R.id.btnCancelarEdit);
         btnGuardar = findViewById(R.id.btnGuardarEdit);
 
@@ -74,6 +75,7 @@ public class EditarDetallesActivity extends AppCompatActivity {
 
                         nombreTexto.setText(document.getString("nombre"));
                         fotoTexto.setText(document.getString("img"));
+                        descripcionTexto.setText(document.getString("descripcion"));
 
                         actualizar();
 
@@ -105,6 +107,7 @@ public class EditarDetallesActivity extends AppCompatActivity {
                 Map<String, Object> data = new HashMap<>();
                 data.put("nombre", nombreTexto.getText().toString());
                 data.put("img", fotoTexto.getText().toString());
+                data.put("descripcion", descripcionTexto.getText().toString());
                 data.put("lista", listaIngredientes);
 
                 docRef

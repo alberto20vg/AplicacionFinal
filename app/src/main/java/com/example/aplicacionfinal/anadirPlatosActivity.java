@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class anadirPlatosActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    TextView textNombre, textFoto;
+    TextView textNombre, textFoto, textDescripcion;
     Button btnCancelar, btnGuardar;
     IngredienteAdapter mAdapter;
     static ArrayList<DocumentReference> listaIngredientes = new ArrayList<>();
@@ -38,6 +38,7 @@ public class anadirPlatosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anadir_platos);
         textNombre = findViewById(R.id.addPlatoNombreId);
         textFoto = findViewById(R.id.addPlatoFotoId);
+        textDescripcion = findViewById(R.id.addPlatoDescripcion);
         btnCancelar = findViewById(R.id.addPlatoBtnCancelId);
         btnGuardar = findViewById(R.id.addPlatobtnGuardarId);
 
@@ -62,6 +63,7 @@ public class anadirPlatosActivity extends AppCompatActivity {
                 Map<String, Object> data = new HashMap<>();
                 data.put("nombre", textNombre.getText().toString());
                 data.put("img", textFoto.getText().toString());
+                data.put("descripcion", textDescripcion.getText().toString());
                 data.put("lista", listaIngredientes);
                 db.collection("Platos")
                         .add(data)
