@@ -115,7 +115,7 @@ public class EditarDetallesActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully updated!");
-                        Toast.makeText(at, nombreTexto.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(at, R.string.safe_ok, Toast.LENGTH_SHORT).show();
                     }
                 })
                         .addOnFailureListener(new OnFailureListener() {

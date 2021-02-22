@@ -15,6 +15,7 @@
     <string name="name">Nombre</string>
     <string name="url_photo">Url Foto</string>
     <string name="description">Descripción</string>
+    <string name="safe_ok">Modificado con existo</string>
     <string name="nombre_restaurante">Restaurante Valdivia </string>
     <string name="email">Correo</string>
     <string name="password">Contraseña</string>
